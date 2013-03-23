@@ -5,7 +5,7 @@ import os
 import json
 
 def msg(msg):
-    print "[PHP Getters and Setters] %s" % msg
+    print("[PHP Getters and Setters] %s" % msg)
 
 class Prefs:
     """
