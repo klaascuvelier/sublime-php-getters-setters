@@ -80,20 +80,22 @@ class DocBlock(object):
 
         for line in lines:
             line = line.strip(' */')
-            if (line.startswith('@')) :
-                nameMatches = re.findall('\@(\w+) (:?.*)[ ]?.*', line)
-                if len(nameMatches) > 0 :
-                    name = nameMatches[0][0]
-                    value = nameMatches[0][1]
+            if not (isinstance(line, NoneType)):
 
-                    self.addTag(name.strip('@'), value)
-                # [name, value, other] = line.split(" ", 2)
+                if (line.startswith('@')) :
+                    nameMatches = re.findall('\@(\w+) (:?.*)[ ]?.*', line)
+                    if len(nameMatches) > 0 :
+                        name = nameMatches[0][0]
+                        value = nameMatches[0][1]
+
+                        self.addTag(name.strip('@'), value)
+                    # [name, value, other] = line.split(" ", 2)
+                    else:
+                        msg("Error: could not parse line %s" %line)
+
                 else:
-                    msg("Error: could not parse line %s" %line)
-
-            else:
-                if len(line) > 0:
-                    description.append(line)
+                    if len(line) > 0:
+                        description.append(line)
 
         self.setDescription("\n".join(description).rstrip("\n"))
 
